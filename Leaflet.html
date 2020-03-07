@@ -1,0 +1,299 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="utf-8"> <!--specifies the character encoding for the HTML document.-->
+	<meta name="viewport" content="width=device-width, initial-scale=1"> <!--sets the scale to 1 and screen width to screen size of user-->
+	<title>Bootstrap Web Page</title>
+	<!--Following are all the libraries and style pages linked to the webpage. The libraries include jquery, cloudflare cdn, bootstrap 4, leaflet etc. Others are the css files linked to the webpage-->
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> 
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="animate.css">
+	<link rel="stylesheet" type="text/css" href="accordion.css">
+	<link rel="stylesheet" type="text/css" href="leaflet-routing-machine.css">
+	<link rel="stylesheet" type="text/css" href="all.min.css">
+	<script src="https://kit.fontawesome.com/da6cc83624.js" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/fontawesome.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script> 
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
+	<link rel="stylesheet" type="text/css" href="Newy.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin="">
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+    crossorigin=""></script>
+</head>
+
+
+<body>
+	<!--HEADER-->
+
+	<div class="container"> <!--container class for the logo of the application-->
+		<img style="padding-left: 45%;" src="logo1.0.png">
+		<!--p>A Web-Based Routing Application for IST</p-->
+	</div>
+
+	<!--NAVBAR and SEARCH BOX-->
+
+	<nav class="navbar navbar-dark bg-dark"> <!--specifying the text color for the navbar as well as background color-->
+       <!--span class="navbar-text mr-5">IST NAV</span-->
+
+        <!--Search Box-->
+
+        <form class="form"> <!--form class used to create a search box-->
+        <div class="form-group"> <!--form group ensures proper margins for the box-->
+			<input class="form-control mr-sm-2" type="search" placeholder="Where To?" aria-label="Search"> <!--Specify what appears inside the box--> 
+		</div>
+		<div class="form-group">
+			<button style="color:#006400; font-family:Verdana;" class="btn btn-light my-sm-0" type="submit">Start Search</button> <!--create a button for the search box using form group again-->
+		</div>
+		</form>
+		<!--adding menu inside the navbar-->
+
+		<ul class="navbar-nav mx-auto"> <!--automatically adjust size of text/buttons etc. inside the navbar-->
+			<li class="nav-item">
+				<button style="background-color:#696969; color: skyblue; font-family: Verdana; padding-left:10%;" class="accordion nav-link" href="#">Home</button> <!--Home tab for menu-->
+			</li>
+			<li class="nav-item dropdown"> 
+				<button style="background-color:#696969; color: skyblue; font-family: Verdana;" class="accordion dropdown-toggle" data-toggle="dropdown" data-target="dropdown_target" href="#">Campus Locations
+				<span class="caret"></span> <!--caret creates a dropdown arrow-->
+				</button>
+				<div class="dropdown-menu" aria-labelledby="dropdown_target"> <!--submenu inside Campus Locations-->
+					<a class="dropdown-item"><i class="fas fa-university fa-lg" style="padding-right: 3%;"></i>Main Block (Raza Block)</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item"><i class="fas fa-university fa-lg" style="padding-right: 3%;"></i>Block II</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item"><i class="fas fa-university fa-lg" style="padding-right: 3%;"></i>Block III</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item"><i class="fas fa-university fa-lg" style="padding-right: 3%;"></i>Block IV</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item"><i class="fas fa-university fa-lg" style="padding-right: 3%;"></i>Block V</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item"><i class="fas fa-university fa-lg" style="padding-right: 3%;"></i>Block VI</a>
+				</div>
+			</li>
+
+
+			<li class="nav-item dropdown">
+				<button style="background-color:#696969; color: skyblue; font-family: Verdana;" class="accordion dropdown-toggle" data-toggle="dropdown" data-target="dropdown_target" href="#">Points of Interest
+					<span class="caret"></span>
+				</button>
+				<div class="dropdown-menu" aria-labelledby="dropdown_target">
+					<button class="accordion">Access</button>
+                    <div class="panel">
+                    <ul>
+                    	<button class="btn-block"><i style="padding-right:10%; color:#F4A460;" class="fas fa-parking"></i>Parking</button>
+                    	<button class="btn-block"><i style="padding-right:10%; color:#DDA0DD;" class="fas fa-door-open"></i>Entrance</button>
+                    </ul>
+                    </div>
+
+                    <button class="accordion">Education</button>
+                    <div class="panel">
+                    	<ul>
+                    		<button class="btn-block"><i style="padding-right:10%; color:#BDB76B;" class="fas fa-book"></i>Library</button>
+                    		<button class="btn-block"><i style="padding-right:10%; color:#008080;" class="fas fa-desktop"></i>Labs</button>
+                    	</ul>
+                    </div>
+
+                    <button class="accordion">Facilities</button>
+                    <div class="panel">
+                    	<ul>
+                    		<button class="btn-block"><i style="padding-right:10%; color:gold;" class="fas fa-utensils"></i>Food</button>
+                    		<button class="btn-block"><i style="padding-right:10%; color:lightblue;" class="fas fa-toilet"></i>Toilet</button>
+                    		<button class="btn-block"><i style="padding-right:10%; color:brown;" class="fas fa-fax"></i>Reproduction Cell</button>
+                    		<button class="btn-block"><i style="padding-right:10%; color:green;" class="fas fa-money-bill-wave"></i>ATM machine</button>
+                    	</ul>
+                    </div>
+				</div>
+			</li>
+
+
+			<!--Route Search Box-->
+
+			<li class="nav-item dropdown"> 
+				<button style="background-color:#696969; color: skyblue; font-family: Verdana;" class="accordion dropdown-toggle" data-toggle="dropdown" data-target="dropdown_target" href="#">Route
+					<span class="caret"></span>
+				</button>
+	           <div class="dropdown-menu" aria-labelledby="dropdown_target"> <!--creating a start point and end point routing search box using inline form-->
+		      <form class="form-inline">
+		        <input style="font-family:Trebuchet MS;" class="form-control mr-sm-1" type="search" placeholder="START Point" aria-label="Search">
+		      </form>
+		       <div class="dropdown-divider"></div>
+		      <form class="form-inline">
+			    <input style="font-family:Trebuchet MS;" class="form-control mr-sm-1" type="search" placeholder="END Point" aria-label="Search">
+			    <button class="btn btn-dark my-sm-0" type="submit">GO!</button> <!--Button for the route search box-->
+		      </form>
+           </li>
+			<li style="margin-bottom: 100%;" class="nav-item dropdown"> <!--Social Media dropdown menu-->
+				<button style="background-color:#696969; color: skyblue; font-family: Verdana;" class="accordion dropdown-toggle" data-toggle="dropdown" data-target=dropdown_target1 href="#">Contact us
+					<span class="caret"></span>
+				</button>
+				<div class="dropdown-menu" aria-labelledby="dropdown_target1">
+					<button class="fab fa-facebook fa-lg btn-block" style="color:#000080; padding:10%;">Facebook</button>
+					<div class="dropdown-divider"></div>
+					<button class="fab fa-twitter fa-lg btn-block" style="color:#1E90FF; padding:10%;">Twitter</button>
+					<div class="dropdown-divider"></div>
+					<button class="fab fa-instagram-square fa-lg btn-block" style="color:#C13584; padding:10%;">Instagram</button>
+					<div class="dropdown-divider"></div>
+					<button class="fas fa-envelope fa-lg btn-block" style="color:#DC143C; padding:10%;">Gmail</button>
+				</div>
+			</li>
+		</ul>
+	</div>
+    </nav>
+
+<!--ACCORDIAN Java Script-->
+<script>
+	var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    /* Toggle between adding and removing the "active" class,
+    to highlight the button that controls the panel */
+    this.classList.toggle("active");
+
+    /* Toggle between hiding and showing the active panel */
+    var panel = this.nextElementSibling;
+    if (panel.style.display === "block") {
+      panel.style.display = "none";
+    } else {
+      panel.style.display = "block";
+    }
+  });
+}
+</script>
+
+
+<!--MAP from Leaflet-->
+
+ <div id="mapid"></div>
+ <script>
+	 	// Tiles for the two basemaps loaded; one is dark and the other is grayscale or light
+	 	var grayscale = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}.png'),
+	 	    dark = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}.png');
+
+	   var map = L.map('mapid', {
+       center: [33.5205, 73.1769],
+       zoom: 17,
+       layers: [dark]});
+
+	   // Loading the basemaps and setting names or variables for them
+
+	 	var baseMaps = {
+	 	"Grayscale": grayscale,
+	 	"Dark": dark
+	 	};
+
+	 	// Loading the "Buildings" layer from geoserver. The layers have been stored and styled prior within geoserver.
+	 	var Buildings = L.tileLayer.wms('http://localhost:8010/geoserver/wms' , {
+        layers: 'IST_Mosaic:Buildings',
+        format: 'image/png',
+        transparent: true});
+        //Buildings.addTo(map);
+
+        // Loading the "Grounds" layer from geoserver. The layers have been stored and styled prior within geoserver
+        var Grounds = L.tileLayer.wms('http://localhost:8010/geoserver/wms' , {
+        layers: 'IST_Mosaic:Grounds',
+        format: 'image/png',
+        transparent: true});
+        //Grounds.addTo(map);
+
+        // Loading the "Lawns" layer from geoserver. The layers have been stored and styled prior within geoserver.
+        var Lawns = L.tileLayer.wms('http://localhost:8010/geoserver/wms' , {
+        layers: 'IST_Mosaic:Lawns',
+        format: 'image/png',
+        transparent: true});
+        //Lawns.addTo(map);
+
+        // Loading the "Line" layer from geoserver. The layers have been stored and styled prior within geoserver
+        var Line = L.tileLayer.wms('http://localhost:8010/geoserver/wms' , {
+        layers: 'IST_Mosaic:Line',
+        format: 'image/png',
+        transparent: true});
+        //Line.addTo(map);
+
+        // Loading the "Trees" layer from geoserver. The layers have been stored and styled prior within geoserver
+        var Trees = L.tileLayer.wms('http://localhost:8010/geoserver/wms' , {
+        layers: 'IST_Mosaic:Trees',
+        format: 'image/png', 
+        transparent: true});
+        //Trees.addTo(map);
+
+        // Loading the "Pedestrian_Path" layer from geoserver. The layers have been stored and styled prior within geoserver
+        var Pedestrian_Path = L.tileLayer.wms('http://localhost:8010/geoserver/wms' , {
+        layers: 'IST_Mosaic:Pedestrian_Path',
+        format: 'image/png',
+        transparent: true});
+        //Pedestrian_Path.addTo(map);
+
+        // Loading the google traffic layer onto the map.
+       //var googleTraffic = L.tileLayer('https://{s}.google.com/vt/lyrs=m@221097413,traffic&x={x}&y={y}&z={z}', {
+        //maxZoom: 20,
+        //minZoom: 2,
+        //subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+    //});
+
+
+	 	//var marker = L.marker([33.5193, 73.1775]).addTo(map);
+
+	//--Adding Layers to the map collectively as one variable--//
+
+	var layer_Poly = L.layerGroup([Buildings,Grounds,Lawns]).addTo(map);
+	var layer_Line = L.layerGroup([Line,Pedestrian_Path]).addTo(map);
+	//var layer_traffic = L.layerGroup([googleTraffic]);
+
+	var overlays = {
+		"Polygons":layer_Poly,
+		"Roads":layer_Line,
+		//"Traffic":layer_traffic
+	};
+	L.control.layers(baseMaps,overlays).addTo(map);
+
+	//--Adding ICONS to the map to highlight some important locations--//
+
+	// Specifying what image appears on the map as the icon.
+	var library = L.icon({
+	 	iconUrl:'lib.png',
+	 	shadowUrl:null,
+	 	iconSize: [40, 40]
+	 });
+	var dining = L.icon({
+	 	iconUrl:'dining.png',
+	 	shadowUrl:null,
+	 	iconSize: [30, 30]
+	 });
+	var tucshop = L.icon({
+	 	iconUrl:'teacup.png',
+	 	shadowUrl:null,
+	 	iconSize: [50, 50]
+	 });
+	var parking = L.icon({
+	 	iconUrl:'parking.png',
+	 	shadowUrl:null,
+	 	iconSize: [30, 30]
+	 });
+	var hostel = L.icon({
+	 	iconUrl:'hostel.png',
+	 	shadowUrl:null,
+	 	iconSize: [30, 30]
+	 });
+	//The markers act as the icons once they have been styled appropriately
+	L.marker([33.520001, 73.175823],{icon:library}).addTo(map).bindPopup("<b>IST Library</b>");
+	L.marker([33.520932, 73.174288],{icon:dining}).addTo(map).bindPopup("<b>IST New Mess</b>");
+	L.marker([33.520413, 73.175694],{icon:tucshop}).addTo(map).bindPopup("<b>IST Tuc Shop</b>");
+	L.marker([33.519383, 73.177498],{icon:parking}).addTo(map).bindPopup("<b>Parking Shed</b>");
+	L.marker([33.522167, 73.173225],{icon:hostel}).addTo(map).bindPopup("<b>Boys Hostel</b>");
+	L.control.scale().addTo(map);
+</script>
+
+<!--Footer-->
+
+<footer class="site-footer">
+	<div class="container">
+		<p style="text-align: center;">&copy; Mohid and Hamza WebPage | ISTNAV.com</p>
+	</div>
+</footer>
+
+</body>
