@@ -31,6 +31,7 @@
 
 	<div class="container"> <!--container class for the logo of the application-->
 		<img style="padding-left: 45%;" src="logo1.0.png">
+		<button type="button" class="btn btn-danger" style="margin-left:29%;">Parking</button>
 		<!--p>A Web-Based Routing Application for IST</p-->
 	</div>
 
@@ -80,7 +81,7 @@
 					<span class="caret"></span>
 				</button>
 				<div class="dropdown-menu" aria-labelledby="dropdown_target">
-					<button class="accordion">Access</button>
+					<button class="accordion"><i style="padding-right:10%"; class="fas fa-hands fa-lg"></i>Access</button>
                     <div class="panel">
                     <ul>
                     	<button class="btn-block"><i style="padding-right:10%; color:#F4A460;" class="fas fa-parking"></i>Parking</button>
@@ -88,7 +89,7 @@
                     </ul>
                     </div>
 
-                    <button class="accordion">Education</button>
+                    <button class="accordion"><i style="padding-right:10%;" class="fas fa-graduation-cap fa-lg"></i>Education</button>
                     <div class="panel">
                     	<ul>
                     		<button class="btn-block"><i style="padding-right:10%; color:#BDB76B;" class="fas fa-book"></i>Library</button>
@@ -96,7 +97,7 @@
                     	</ul>
                     </div>
 
-                    <button class="accordion">Facilities</button>
+                    <button class="accordion"><i style="padding-right:10%;" class="fas fa-hands-helping fa-lg"></i>Facilities</button>
                     <div class="panel">
                     	<ul>
                     		<button class="btn-block"><i style="padding-right:10%; color:gold;" class="fas fa-utensils"></i>Food</button>
@@ -125,12 +126,12 @@
 			    <button class="btn btn-dark my-sm-0" type="submit">GO!</button> <!--Button for the route search box-->
 		      </form>
            </li>
-			<li style="margin-bottom: 100%;" class="nav-item dropdown"> <!--Social Media dropdown menu-->
+			<li style="margin-bottom:40%;" class="nav-item dropdown"> <!--Social Media dropdown menu-->
 				<button style="background-color:#696969; color: skyblue; font-family: Verdana;" class="accordion dropdown-toggle" data-toggle="dropdown" data-target=dropdown_target1 href="#">Contact us
 					<span class="caret"></span>
 				</button>
 				<div class="dropdown-menu" aria-labelledby="dropdown_target1">
-					<button class="fab fa-facebook fa-lg btn-block" style="color:#000080; padding:10%;">Facebook</button>
+					<button class="fab fa-facebook fa-lg btn-block" style="color:#4169E1; padding:10%;">Facebook</button>
 					<div class="dropdown-divider"></div>
 					<button class="fab fa-twitter fa-lg btn-block" style="color:#1E90FF; padding:10%;">Twitter</button>
 					<div class="dropdown-divider"></div>
@@ -172,19 +173,25 @@ for (i = 0; i < acc.length; i++) {
  <script>
 	 	// Tiles for the two basemaps loaded; one is dark and the other is grayscale or light
 	 	var grayscale = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}.png'),
-	 	    dark = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}.png');
-
+	 	    dark = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}.png'),
+	 	    opentop = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',{attribution:
+	 	    	'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'}), 
+	 	    topo = L.tileLayer('https://api.maptiler.com/maps/topo/{z}/{x}/{y}.png?key=hraKUEXo01PIqJfiVq1A',{attribution:
+	 	    	'<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'});
+	 	   
 	   var map = L.map('mapid', {
        center: [33.5205, 73.1769],
        zoom: 17,
-       layers: [dark]});
+       layers: [opentop]});
 
 	   // Loading the basemaps and setting names or variables for them
 
 	 	var baseMaps = {
 	 	"Grayscale": grayscale,
-	 	"Dark": dark
-	 	};
+	 	"Dark": dark,
+	 	"Open-Topographic": opentop,
+	 	"Topographic": topo
+	 };
 
 	 	// Loading the "Buildings" layer from geoserver. The layers have been stored and styled prior within geoserver.
 	 	var Buildings = L.tileLayer.wms('http://localhost:8010/geoserver/wms' , {
@@ -209,7 +216,7 @@ for (i = 0; i < acc.length; i++) {
 
         // Loading the "Line" layer from geoserver. The layers have been stored and styled prior within geoserver
         var Line = L.tileLayer.wms('http://localhost:8010/geoserver/wms' , {
-        layers: 'IST_Mosaic:Line',
+        layers: 'IST_Mosaic:Roads',
         format: 'image/png',
         transparent: true});
         //Line.addTo(map);
@@ -295,5 +302,4 @@ for (i = 0; i < acc.length; i++) {
 		<p style="text-align: center;">&copy; Mohid and Hamza WebPage | ISTNAV.com</p>
 	</div>
 </footer>
-
 </body>
