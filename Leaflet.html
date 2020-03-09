@@ -31,9 +31,24 @@
 
 	<div class="container"> <!--container class for the logo of the application-->
 		<img style="padding-left: 45%;" src="logo1.0.png">
-		<button type="button" class="btn btn-danger" style="margin-left:29%;">Parking</button>
+		<button id="demo" class="btn btn-danger" style="margin-left:29%;">Parking</button>
 		<!--p>A Web-Based Routing Application for IST</p-->
 	</div>
+
+	<!--Modal for displaying Parking info-->
+
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+  <div style="background-color:#FF6347; width:23%; float:right; margin-top:4%;" class="modal-content">
+    <span class="close">&times;</span>
+   <ul>
+    <li style="font-family:Verdana; text-align: center; color:#FAFAD2;">Parking Space: 100 vehicles</li>
+    <li style="font-family:Verdana; text-align: center; color:#FAFAD2;">Occupied Space: 80 vehicles</li>
+    <li style="font-family:Verdana; text-align: center; color:#FAFAD2;">Available Space: 20 vehicles</li>
+   </ul>
+</div>
+</div>
 
 	<!--NAVBAR and SEARCH BOX-->
 
@@ -144,7 +159,7 @@
 	</div>
     </nav>
 
-<!--ACCORDIAN Java Script-->
+<!--ACCORDIAN/Parking Button Java Script-->
 <script>
 	var acc = document.getElementsByClassName("accordion");
 var i;
@@ -163,6 +178,21 @@ for (i = 0; i < acc.length; i++) {
       panel.style.display = "block";
     }
   });
+}
+
+  var modal = document.getElementById("myModal");
+  var popup = document.getElementById("demo");
+  var span = document.getElementsByClassName("close")[0];
+  popup.onclick = function() {
+  modal.style.display = "block";
+  span.onclick = function() {
+  modal.style.display = "none";
+}
+}
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
 }
 </script>
 
