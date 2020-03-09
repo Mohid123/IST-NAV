@@ -54,10 +54,10 @@
 
 		<ul class="navbar-nav mx-auto"> <!--automatically adjust size of text/buttons etc. inside the navbar-->
 			<li class="nav-item">
-				<button style="background-color:#696969; color: skyblue; font-family: Verdana; padding-left:10%;" class="accordion nav-link" href="#">Home</button> <!--Home tab for menu-->
+				<button style="background-color:#2F4F4F; color:white; font-family: Verdana; padding-left:10%;" class="accordion nav-link" href="#">Home</button> <!--Home tab for menu-->
 			</li>
 			<li class="nav-item dropdown"> 
-				<button style="background-color:#696969; color: skyblue; font-family: Verdana;" class="accordion dropdown-toggle" data-toggle="dropdown" data-target="dropdown_target" href="#">Campus Locations
+				<button style="background-color:#2F4F4F; color: white; font-family: Verdana;" class="accordion dropdown-toggle" data-toggle="dropdown" data-target="dropdown_target" href="#">Campus Locations
 				<span class="caret"></span> <!--caret creates a dropdown arrow-->
 				</button>
 				<div class="dropdown-menu" aria-labelledby="dropdown_target"> <!--submenu inside Campus Locations-->
@@ -77,7 +77,7 @@
 
 
 			<li class="nav-item dropdown">
-				<button style="background-color:#696969; color: skyblue; font-family: Verdana;" class="accordion dropdown-toggle" data-toggle="dropdown" data-target="dropdown_target" href="#">Points of Interest
+				<button style="background-color:#2F4F4F; color: white; font-family: Verdana;" class="accordion dropdown-toggle" data-toggle="dropdown" data-target="dropdown_target" href="#">Points of Interest
 					<span class="caret"></span>
 				</button>
 				<div class="dropdown-menu" aria-labelledby="dropdown_target">
@@ -113,7 +113,7 @@
 			<!--Route Search Box-->
 
 			<li class="nav-item dropdown"> 
-				<button style="background-color:#696969; color: skyblue; font-family: Verdana;" class="accordion dropdown-toggle" data-toggle="dropdown" data-target="dropdown_target" href="#">Route
+				<button style="background-color:#2F4F4F; color:white; font-family: Verdana;" class="accordion dropdown-toggle" data-toggle="dropdown" data-target="dropdown_target" href="#">Route
 					<span class="caret"></span>
 				</button>
 	           <div class="dropdown-menu" aria-labelledby="dropdown_target"> <!--creating a start point and end point routing search box using inline form-->
@@ -127,7 +127,7 @@
 		      </form>
            </li>
 			<li style="margin-bottom:40%;" class="nav-item dropdown"> <!--Social Media dropdown menu-->
-				<button style="background-color:#696969; color: skyblue; font-family: Verdana;" class="accordion dropdown-toggle" data-toggle="dropdown" data-target=dropdown_target1 href="#">Contact us
+				<button style="background-color:#2F4F4F; color:white; font-family: Verdana;" class="accordion dropdown-toggle" data-toggle="dropdown" data-target=dropdown_target1 href="#">Contact us
 					<span class="caret"></span>
 				</button>
 				<div class="dropdown-menu" aria-labelledby="dropdown_target1">
@@ -256,7 +256,7 @@ for (i = 0; i < acc.length; i++) {
 		"Roads":layer_Line,
 		//"Traffic":layer_traffic
 	};
-	L.control.layers(baseMaps,overlays).addTo(map);
+	layer_control = L.control.layers(baseMaps,overlays, {position:'topleft'}).addTo(map);
 
 	//--Adding ICONS to the map to highlight some important locations--//
 
@@ -264,27 +264,27 @@ for (i = 0; i < acc.length; i++) {
 	var library = L.icon({
 	 	iconUrl:'lib.png',
 	 	shadowUrl:null,
-	 	iconSize: [40, 40]
+	 	iconSize: [35, 35]
 	 });
 	var dining = L.icon({
 	 	iconUrl:'dining.png',
 	 	shadowUrl:null,
-	 	iconSize: [30, 30]
+	 	iconSize: [28, 28]
 	 });
 	var tucshop = L.icon({
 	 	iconUrl:'teacup.png',
 	 	shadowUrl:null,
-	 	iconSize: [50, 50]
+	 	iconSize: [40, 40]
 	 });
 	var parking = L.icon({
 	 	iconUrl:'parking.png',
 	 	shadowUrl:null,
-	 	iconSize: [30, 30]
+	 	iconSize: [28, 28]
 	 });
 	var hostel = L.icon({
 	 	iconUrl:'hostel.png',
 	 	shadowUrl:null,
-	 	iconSize: [30, 30]
+	 	iconSize: [28, 28 ]
 	 });
 	//The markers act as the icons once they have been styled appropriately
 	L.marker([33.520001, 73.175823],{icon:library}).addTo(map).bindPopup("<b>IST Library</b>");
