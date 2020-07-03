@@ -1,4 +1,4 @@
-## Welcome to GitHub Pages
+## Welcome to Mohid's Github Page
 
 You can use the [editor on GitHub](https://github.com/Mohid123/IST-NAV/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
