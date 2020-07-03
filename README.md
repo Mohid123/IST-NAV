@@ -1,10 +1,8 @@
 ## Welcome to Mohid's Github Page
 
-You can use the [editor on GitHub](https://github.com/Mohid123/IST-NAV/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+This page serves as a gateway to the routing project IST-NAV. IST-NAV is basically a web based routing application for the Institute of Space Technology. The project is being developed by a couple of Students and is currently unfinished, If you are interested, stay tuned for more updates.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
+### IST-NAV: A Web Based Routing application for IST.
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
