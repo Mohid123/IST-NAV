@@ -1,2 +1,35 @@
-# IST-NAV
-All material related to the project "IST-NAV" available here
+## Welcome to Mohid's Github Page
+
+This page serves as a gateway to the routing project IST-NAV. IST-NAV is basically a web based routing application for the Institute of Space Technology. The project is being developed by a couple of Students and is currently unfinished, If you are interested, stay tuned for more updates.
+
+### IST-NAV: A Web Based Routing application for IST.
+
+Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+
+```markdown
+Syntax highlighted code block
+
+# Header 1
+## Header 2
+### Header 3
+
+- Bulleted
+- List
+
+1. Numbered
+2. List
+
+**Bold** and _Italic_ and `Code` text
+
+[Link](url) and ![Image](src)
+```
+
+For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+
+### Jekyll Themes
+
+Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Mohid123/IST-NAV/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+
+### Support or Contact
+
+Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
