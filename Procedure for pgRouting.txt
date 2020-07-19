@@ -8,6 +8,9 @@ SELECT Find_SRID('public', 'roads', 'geom');
 --ALTER TABLE public.roads 
 --ALTER COLUMN geom TYPE geometry(MultiLineString,4326)
 --USING ST_Force2D(geom);
+
+--ALTER TABLE roads ADD COLUMN length double precision;  (Missing?!?)
+
 --UPDATE roads SET length = ST_Length(geom::geography);
 
 ALTER TABLE roads ADD source INT4;
