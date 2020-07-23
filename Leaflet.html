@@ -12,6 +12,10 @@
 	<link rel="stylesheet" type="text/css" href="animate.css">
 	<link rel="stylesheet" type="text/css" href="accordion.css">
 	<link rel="stylesheet" type="text/css" href="all.min.css">
+	<link rel="stylesheet" type="text/css" href="leaflet-routing-machine.css">
+	<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet'>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css">
+	<link rel="stylesheet" href="leaflet.zoomhome.css">
 	<script src="https://kit.fontawesome.com/da6cc83624.js" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/fontawesome.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script> 
@@ -25,6 +29,15 @@
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
     integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
     crossorigin=""></script>
+    <script src="https://cdn-webgl.eegeo.com/eegeojs/early_access/latest/eegeo.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw-src.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.js"></script>
+    <script src="leaflet-routing-machine.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.0/angular.min.js"></script>
+    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+    <script src="leaflet.zoomhome.min.js"></script>
 </head>
 
 
@@ -33,7 +46,7 @@
 
 	<div class="container"> <!--container class for the logo of the application-->
 		<img style="padding-left: 45%;" src="logo1.0.png">
-		<button id="demo" class="btn btn-danger" style="margin-left:29%;">Parking</button>
+		<!--button id="demo" class="btn btn-danger" style="margin-left:29%;">Parking</button-->
 	</div>
 
 
@@ -49,63 +62,64 @@
 			<input class="form-control mr-sm-2" type="search" placeholder="Where To?" aria-label="Search"> <!--Specify what appears inside the box--> 
 		</div>
 		<div class="form-group">
-			<button style="color:#006400; font-family:Verdana;" class="btn btn-light my-sm-0" type="submit">Start Search</button> <!--create a button for the search box using form group again-->
+			<button style="color:#006400; font-family: Snell Roundhand, cursive; font-size: 16px;" class="btn btn-light my-sm-0" type="submit">Start Search</button> <!--create a button for the search box using form group again-->
 		</div>
 		</form>
 		<!--adding menu inside the navbar-->
 
-		<ul class="navbar-nav mx-auto"> <!--automatically adjust size of text/buttons etc. inside the navbar-->
+		<ul class="navbar-nav mx-auto" style="margin-top: 10%;"> <!--automatically adjust size of text/buttons etc. inside the navbar-->
 			<li class="nav-item">
-				<button style="background-color:#2F4F4F; color:white; font-family: Verdana; padding-left:10%;" class="accordion nav-link" href="#">Home</button> <!--Home tab for menu-->
+				<button style="background-color:#2F4F4F; color:white; font-family: Snell Roundhand, cursive; padding-left:6%; font-size: 20px;" class="accordion nav-link" href="#" title="We Need to talk About Us!">About the Developers</button> <!--Home tab for menu-->
 			</li>
 			<li class="nav-item dropdown"> 
-				<button style="background-color:#2F4F4F; color: white; font-family: Verdana;" class="accordion dropdown-toggle" data-toggle="dropdown" data-target="dropdown_target" href="#">Campus Locations
+				<button style="background-color:#2F4F4F; color: white; font-family: Snell Roundhand, cursive; font-size: 20px;" class="accordion dropdown-toggle" data-toggle="dropdown" data-target="dropdown_target" href="#" title="Main Buildings of IST">Campus Locations
 				<span class="caret"></span> <!--caret creates a dropdown arrow-->
 				</button>
 				<div class="dropdown-menu" aria-labelledby="dropdown_target"> <!--submenu inside Campus Locations-->
-					<a class="dropdown-item"><i class="fas fa-university fa-lg" style="padding-right: 3%;"></i>Main Block (Raza Block)</a>
+					<a id="uni" class="dropdown-item" style="cursor: pointer;"><i class="fas fa-university fa-lg" style="padding-right: 3%;"></i>Main Block (Raza Block)</a>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item"><i class="fas fa-university fa-lg" style="padding-right: 3%;"></i>Block II</a>
+					<a id="uni1" class="dropdown-item" style="cursor: pointer;"><i class="fas fa-university fa-lg" style="padding-right: 3%;"></i>Block II</a>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item"><i class="fas fa-university fa-lg" style="padding-right: 3%;"></i>Block III</a>
+					<a id="uni2" class="dropdown-item" style="cursor: pointer;"><i class="fas fa-university fa-lg" style="padding-right: 3%;"></i>Block III</a>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item"><i class="fas fa-university fa-lg" style="padding-right: 3%;"></i>Block IV</a>
+					<a id="uni3" class="dropdown-item" style="cursor: pointer;"><i class="fas fa-university fa-lg" style="padding-right: 3%;"></i>Block IV</a>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item"><i class="fas fa-university fa-lg" style="padding-right: 3%;"></i>Block V</a>
+					<a id="uni4" class="dropdown-item" style="cursor: pointer;"><i class="fas fa-university fa-lg" style="padding-right: 3%;"></i>Block V</a>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item"><i class="fas fa-university fa-lg" style="padding-right: 3%;"></i>Block VI</a>
+					<a id="uni5" class="dropdown-item" style="cursor: pointer;"><i class="fas fa-university fa-lg" style="padding-right: 3%;"></i>Block VI</a>
 				</div>
 			</li>
 
 
 			<li class="nav-item dropdown">
-				<button style="background-color:#2F4F4F; color: white; font-family: Verdana;" class="accordion dropdown-toggle" data-toggle="dropdown" data-target="dropdown_target" href="#">Points of Interest
+				<button style="background-color:#2F4F4F; color: white; font-family: Snell Roundhand, cursive; font-size: 20px;" class="accordion dropdown-toggle" data-toggle="dropdown" data-target="dropdown_target" href="#" title="These might interest you">Points of Interest
 					<span class="caret"></span>
 				</button>
 				<div class="dropdown-menu" aria-labelledby="dropdown_target">
-					<button class="accordion"><i style="padding-right:10%"; class="fas fa-hands fa-lg"></i>Access</button>
+					<button class="accordion" title="Click for more options"><i style="padding-right:10%"; class="fas fa-hands fa-lg"></i>Access</button>
                     <div class="panel">
                     <ul>
-                    	<button class="btn-block"><i style="padding-right:10%; color:#F4A460;" class="fas fa-parking"></i>Parking</button>
-                    	<button class="btn-block"><i style="padding-right:10%; color:#DDA0DD;" class="fas fa-door-open"></i>Entrance</button>
+                    	<button id="park" class="btn-block" title="Good Luck finding a spot"><i style="padding-right:10%; color:#F4A460;" class="fas fa-parking"></i>Parking</button>
+                    	<button id="enter" class="btn-block" title="What! No Reception Commitee"><i style="padding-right:10%; color:#DDA0DD;" class="fas fa-door-open"></i>Entrance</button>
+                    	<button id="host" class="btn-block" title="Restful Accommodations"><i style="padding-right:10%; color:#F4A460;" class="fas fa-bed"></i>Hostels</button>
                     </ul>
                     </div>
 
-                    <button class="accordion"><i style="padding-right:10%;" class="fas fa-graduation-cap fa-lg"></i>Education</button>
+                    <button class="accordion" title="Click for more options"><i style="padding-right:10%;" class="fas fa-graduation-cap fa-lg"></i>Education</button>
                     <div class="panel">
                     	<ul>
-                    		<button class="btn-block"><i style="padding-right:10%; color:#BDB76B;" class="fas fa-book"></i>Library</button>
-                    		<button class="btn-block"><i style="padding-right:10%; color:#008080;" class="fas fa-desktop"></i>Labs</button>
+                    		<button id="lib" class="btn-block" title="Keep Quiet and Get Yourself a Book to Read"><i style="padding-right:10%; color:#BDB76B;" class="fas fa-book"></i>Library</button>
+                    		<button id="lab" class="btn-block" title="Instruments, but not the musical ones"><i style="padding-right:10%; color:#008080;" class="fas fa-desktop"></i>Labs</button>
                     	</ul>
                     </div>
 
-                    <button class="accordion"><i style="padding-right:10%;" class="fas fa-user-cog fa-lg"></i>Facilities</button>
+                    <button class="accordion" title="Click for more options"><i style="padding-right:10%;" class="fas fa-user-cog fa-lg"></i>Facilities</button>
                     <div class="panel">
                     	<ul>
-                    		<button class="btn-block"><i style="padding-right:10%; color:gold;" class="fas fa-utensils"></i>Food</button>
-                    		<button class="btn-block"><i style="padding-right:10%; color:lightblue;" class="fas fa-toilet"></i>Toilet</button>
-                    		<button class="btn-block"><i style="padding-right:10%; color:brown;" class="fas fa-fax"></i>Reproduction Cell</button>
-                    		<button class="btn-block"><i style="padding-right:10%; color:green;" class="fas fa-money-bill-wave"></i>ATM machine</button>
+                    		<button id="Food" class="btn-block" title="Hunger Solutions"><i style="padding-right:10%; color:gold;" class="fas fa-utensils"></i>Food</button>
+                    		<button id="toil" class="btn-block" title="When You Gotta Go, You Gotta Go!"><i style="padding-right:10%; color:skyblue;" class="fas fa-toilet"></i>Toilet</button>
+                    		<button id="rep" class="btn-block" title="It actually means a photocopier. What did you think it meant?"><i style="padding-right:10%; color:brown;" class="fas fa-fax"></i>Reproduction Cell</button>
+                    		<button id="atm" class="btn-block" title="Here Comes the Money!"><i style="padding-right:10%; color:green;" class="fas fa-money-bill-wave"></i>ATM machine</button>
                     	</ul>
                     </div>
 				</div>
@@ -115,7 +129,7 @@
 			<!--Route Search Box-->
 
 			<li class="nav-item dropdown"> 
-				<button style="background-color:#2F4F4F; color:white; font-family: Verdana;" class="accordion dropdown-toggle" data-toggle="dropdown" data-target="dropdown_target" href="#">Route
+				<button style="background-color:#2F4F4F; color:white; font-family: Snell Roundhand, cursive; font-size: 20px;" class="accordion dropdown-toggle" data-toggle="dropdown" data-target="dropdown_target" href="#" title="There's always a way">Route
 					<span class="caret"></span>
 				</button>
 	           <div class="dropdown-menu" aria-labelledby="dropdown_target"> <!--creating a start point and end point routing search box using inline form-->
@@ -129,7 +143,7 @@
 		      </form>
            </li>
 			<li style="margin-bottom:40%;" class="nav-item dropdown"> <!--Social Media dropdown menu-->
-				<button style="background-color:#2F4F4F; color:white; font-family: Verdana;" class="accordion dropdown-toggle" data-toggle="dropdown" data-target=dropdown_target1 href="#">Contact us
+				<button style="background-color:#2F4F4F; color:white; font-family: Snell Roundhand, cursive; font-size: 20px;" class="accordion dropdown-toggle" data-toggle="dropdown" data-target=dropdown_target1 href="#" title="We'd rather you don't">Contact us
 					<span class="caret"></span>
 				</button>
 				<div class="dropdown-menu" aria-labelledby="dropdown_target1">
