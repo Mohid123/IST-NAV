@@ -1,0 +1,22 @@
+1.Search on Google "geoserver download". Click on the site that appears. Go to Archived. Select 2.15.1. Then scroll down to
+Extensions and go further down to Miscellaneous. You will see a link labelled CSS Styling. Click on it.
+It will redirect you to a download page. The download will automatically start in 1-2 mins. Once downloaded
+Extract the zip folder. The zip folder contains css extension for geoserver.
+
+2. Extract the contents of the zip folder into the WEB-INF/lib directory in GeoServer.
+Do not create any sub-directories during the extraction process.
+The directory will look something like this:
+C:\Program Files (x86)\GeoServer 2.15.1\webapps\geoserver\WEB-INF\lib
+
+3.Start Geoserver
+
+4.Go to styles. Click Add new style. Select a name for your style. Choose workspace. Click on Format and
+ You will see a new entry for css. Select it and start styling below. 
+
+5. You can use this style for any polygon as pratice:
+* {
+    stroke: #000000;
+    stroke-width: 0.5;
+    fill:#6aa84f;
+}
+6. Validate, Apply and click LayerPreview for this style to make sure it worked. Then you can submit. 
