@@ -13,9 +13,13 @@
 	<link rel="stylesheet" type="text/css" href="accordion.css">
 	<link rel="stylesheet" type="text/css" href="all.min.css">
 	<link rel="stylesheet" type="text/css" href="leaflet-routing-machine.css">
+	<link rel="stylesheet" type="text/css" href="leaflet-liveupdate.css">
 	<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet'>
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css">
+	<link rel="stylesheet" href="leaflet-gps.min.css">
 	<link rel="stylesheet" href="leaflet.zoomhome.css">
+	<link rel="stylesheet" href="Control.Coordinates.css">
+	<link rel="stylesheet" href="leaflet-liveupdate.css">
 	<script src="https://kit.fontawesome.com/da6cc83624.js" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/fontawesome.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script> 
@@ -23,6 +27,9 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
 	<script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="Newy.css">
+	<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css">
+	<link rel="stylesheet" type="text/css" href="leaflet-messagebox.css">
+	<link rel="stylesheet" type="text/css" href="fontawesome.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
     integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
     crossorigin="">
@@ -38,10 +45,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.0/angular.min.js"></script>
     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
     <script src="leaflet.zoomhome.min.js"></script>
+    <script src="Control.Coordinates.js"></script>
+    <script src="fontawesome.min.js"></script>
+    <script src="leaflet-gps.min.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <script src="leaflet-messagebox.js"></script>
+    <script src="leaflet-liveupdate.js"></script>
+    <script src="L.sun.js"></script>
 </head>
 
 
 <body>
+	<div class="loader-wrapper">
+    <span class="loader"><span class="loader-inner"></span></span>
+</div>
 	<!--HEADER-->
 
 	<div class="container"> <!--container class for the logo of the application-->
@@ -59,20 +76,36 @@
 
         <form class="form"> <!--form class used to create a search box for the routing queries-->
         <div class="form-group"> <!--form group ensures proper margins for the box-->
-			<input class="form-control mr-sm-2" type="search" placeholder="Where To?" aria-label="Search"> <!--Specify what appears inside the box--> 
+			<input class="form-control mr-sm-0" type="search" placeholder="Where To?" aria-label="Search"> <!--Specify what appears inside the box--> 
 		</div>
 		<div class="form-group">
 			<button style="color:#006400; font-family: Snell Roundhand, cursive; font-size: 16px;" class="btn btn-light my-sm-0" type="submit">Start Search</button> <!--create a button for the search box using form group again-->
 		</div>
 		</form>
+
+	           <div class="route-box" style="border: dashed; border-color: white; border-width: 2px;"> <!--creating a start point and end point routing search box using inline form-->
+		      <form class="form-inline" style="margin-top: 6px; margin-left: 4px;">
+		        <input style="font-family:Trebuchet MS;" class="form-control mr-sm-1" type="search" placeholder="START Point" aria-label="Search">
+		      </form>
+		    <hr style="display: block; margin-before: 0.5em; margin-after: 0.5em; margin-start: auto; margin-end: auto; overflow: hidden; border-style: inset; border-width: 1px;">
+		      <form class="form-inline" style="margin-bottom: 6px; margin-left: 4px;">
+			    <input style="font-family:Trebuchet MS;" class="form-control mr-sm-1" type="search" placeholder="END Point" aria-label="Search"> <!--Button for the route search box-->
+		      </form>
+		      <button class="btn btn-success my-sm-2" type="submit" style="margin-left: 30%;">GO!</button>
+		  </div>
 		<!--adding menu inside the navbar-->
 
-		<ul class="navbar-nav mx-auto" style="margin-top: 10%;"> <!--automatically adjust size of text/buttons etc. inside the navbar-->
-			<li class="nav-item">
-				<button style="background-color:#2F4F4F; color:white; font-family: Snell Roundhand, cursive; padding-left:6%; font-size: 20px;" class="accordion nav-link" href="#" title="We Need to talk About Us!">About the Developers</button> <!--Home tab for menu-->
+		<ul class="navbar-nav mx-auto" style="margin-top: 10%; width:100%;"> <!--automatically adjust size of text/buttons etc. inside the navbar-->
+			<li class="nav-item dropdown">
+				<button style="background-color:#137d7d; color:white; font-family: Snell Roundhand, cursive; padding-left:8%; font-size: 19px; border-radius: 5px;" class="accordion dropdown-toggle" data-toggle="dropdown" data-target="dropdown_target" href="#" title="Get to Know Us!">About the Devs</button>
+						<div class="dropdown-menu" aria-labelledby="dropdown_target">
+							<p style="color:black; font-family: Snell Roundhand, cursive; padding-left:2%; font-size: 14px;">We Need To Talk About Us!</p>
+							<img src="Collage.jpg" style="width: 100%; height:120%; " class="dropdown-item">
+							<p style="color:black; font-family: Snell Roundhand, cursive; padding-left:2%; font-size: 14px;">On Second thought, let's not. A Photo must suffice.</p>
+						</div> <!--Home tab for menu-->
 			</li>
 			<li class="nav-item dropdown"> 
-				<button style="background-color:#2F4F4F; color: white; font-family: Snell Roundhand, cursive; font-size: 20px;" class="accordion dropdown-toggle" data-toggle="dropdown" data-target="dropdown_target" href="#" title="Main Buildings of IST">Campus Locations
+				<button style="background-color:#137d7d; color: white; font-family: Snell Roundhand, cursive; font-size: 19px; border-radius: 5px;" class="accordion dropdown-toggle" data-toggle="dropdown" data-target="dropdown_target" href="#" title="Main Buildings of IST">Campus Locations
 				<span class="caret"></span> <!--caret creates a dropdown arrow-->
 				</button>
 				<div class="dropdown-menu" aria-labelledby="dropdown_target"> <!--submenu inside Campus Locations-->
@@ -92,7 +125,7 @@
 
 
 			<li class="nav-item dropdown">
-				<button style="background-color:#2F4F4F; color: white; font-family: Snell Roundhand, cursive; font-size: 20px;" class="accordion dropdown-toggle" data-toggle="dropdown" data-target="dropdown_target" href="#" title="These might interest you">Points of Interest
+				<button style="background-color:#137d7d; color: white; font-family: Snell Roundhand, cursive; font-size: 19px; border-radius: 5px;" class="accordion dropdown-toggle" data-toggle="dropdown" data-target="dropdown_target" href="#" title="These might interest you">Points of Interest
 					<span class="caret"></span>
 				</button>
 				<div class="dropdown-menu" aria-labelledby="dropdown_target">
@@ -125,25 +158,8 @@
 				</div>
 			</li>
 
-
-			<!--Route Search Box-->
-
-			<li class="nav-item dropdown"> 
-				<button style="background-color:#2F4F4F; color:white; font-family: Snell Roundhand, cursive; font-size: 20px;" class="accordion dropdown-toggle" data-toggle="dropdown" data-target="dropdown_target" href="#" title="There's always a way">Route
-					<span class="caret"></span>
-				</button>
-	           <div class="dropdown-menu" aria-labelledby="dropdown_target"> <!--creating a start point and end point routing search box using inline form-->
-		      <form class="form-inline">
-		        <input style="font-family:Trebuchet MS;" class="form-control mr-sm-1" type="search" placeholder="START Point" aria-label="Search">
-		      </form>
-		       <div class="dropdown-divider"></div>
-		      <form class="form-inline">
-			    <input style="font-family:Trebuchet MS;" class="form-control mr-sm-1" type="search" placeholder="END Point" aria-label="Search">
-			    <button class="btn btn-dark my-sm-0" type="submit">GO!</button> <!--Button for the route search box-->
-		      </form>
-           </li>
 			<li style="margin-bottom:40%;" class="nav-item dropdown"> <!--Social Media dropdown menu-->
-				<button style="background-color:#2F4F4F; color:white; font-family: Snell Roundhand, cursive; font-size: 20px;" class="accordion dropdown-toggle" data-toggle="dropdown" data-target=dropdown_target1 href="#" title="We'd rather you don't">Contact us
+				<button style="background-color:#137d7d; color:white; font-family: Snell Roundhand, cursive; font-size: 19px; border-radius: 5px;" class="accordion dropdown-toggle" data-toggle="dropdown" data-target=dropdown_target1 href="#" title="We'd rather you don't">Contact us
 					<span class="caret"></span>
 				</button>
 				<div class="dropdown-menu" aria-labelledby="dropdown_target1">
@@ -182,8 +198,11 @@ for (i = 0; i < acc.length; i++) {
     }
   });
 }
-// Parking Button //
 
+// Loading Screen //
+$(window).on("load",function(){
+     $(".loader-wrapper").fadeOut("slow");
+});
 </script>
 
 <!--Footer-->
