@@ -1,27 +1,20 @@
-## Welcome to Mohid's Github Page
+## Welcome to Mohid and Hamza's Github Page
 
-This page serves as a gateway to the routing project IST-NAV. IST-NAV is basically a web based routing application for the Institute of Space Technology. The project is being developed by a couple of Students and is currently unfinished, If you are interested, stay tuned for more updates.
+This page serves as a gateway to the routing project IST-NAV. IST-NAV is basically a web based routing application for the Institute of Space Technology. The project has been developed by Students from Institute of Space Technology.
 
 ### IST-NAV: A Web Based Routing application for IST.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## Leaflet.html
+Leaflet.html is the main webpage for IST-NAV. It includes the entire code for the GUI design for IST-NAV 
+## Routing.js
+This is the JS file for all routing functionalities,  buttons, navbar and wms layers from geoserver
+## Newy.css
+This is the main styles file for IST-NAV
+## Tools used apart from HTML/CSS and JS:
+- Geoserver to publish host and publish layers
+- POSTGIS and pgRouting to run and test the routing algorithm
 
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+![Image]()
 ```
 
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
