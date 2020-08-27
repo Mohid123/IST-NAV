@@ -1,3 +1,4 @@
+//----BASEMAPS----//
 var grayscale = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/light_nolabels/{z}/{x}/{y}.png'),
 dark = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/dark_nolabels/{z}/{x}/{y}.png'),
 //OSM = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -25,12 +26,13 @@ var baseMaps = {
 	"Topographic": topo
 };
 
+//---HOME BUTTON----//
+
 var zoomHome = L.Control.zoomHome();
 zoomHome.addTo(map);
-//map.addControl(new L.Control.Fullscreen());
-//var buffer = L.circle([33.519484, 73.177532], {radius: 200}).addTo(map);
 
-var c = new L.Control.Coordinates();  //you can send options to the constructor if you want to, otherwise default values are used
+//---Get Coordinates on Click--//
+var c = new L.Control.Coordinates();  
 
 c.addTo(map);
 
@@ -38,37 +40,8 @@ map.on('click', function(e) {
     c.setCoordinates(e);
 });
 
-var popup = L.popup();
-
-	function onMapClick(e) {
-		popup
-			.setLatLng(e.latlng)
-			//.setContent("You clicked the map at " + e.latlng.toString())  //this.getLatLng() don't work
-			.setContent("Sunset at " + L.sun.sunset(e.latlng))  //this.getLatLng() don't work
-			.openOn(map);
-	}
-	map.on('click', onMapClick);
-
-
-
-/*
-var options = { timeout: 5000 }
-var box = L.control.messagebox(options).addTo(map);
-var box2 = L.control.messagebox(options).addTo(map);
-
-L.control.liveupdate ({
-    update_map: function () {
-        box.show( 'IST-NAV is free to use!!' );
-        box2.show( 'Lost? Use the search box and get back on track' );
-    },
-    position: 'topleft'
-})
-.addTo(map)
-.startUpdating();*/
-
-//map.addControl(new L.Control.Gps());
-
 // Loading the "Buildings" layer from geoserver. The layers have been stored and styled prior within geoserver.
+
 var Buildings = L.tileLayer.wms('http://localhost:8010/geoserver/IST_Mosaic/wms' , {
 	layers: 'IST_Mosaic:Buildings1',
     format: 'image/png',
@@ -92,12 +65,64 @@ var Line = L.tileLayer.wms('http://localhost:8010/geoserver/IST_Mosaic/wms' , {
     format: 'image/png',
     transparent: true}).addTo(map);
 
+var points = L.tileLayer.wms('http://localhost:8010/geoserver/IST_Mosaic/wms' , {
+	layers: 'IST_Mosaic:points',
+    format: 'image/png',
+    transparent: true})//.addTo(map);
+
 var sicon =  L.icon({
     iconUrl: 'start.png',
     shadowUrl: null,
     iconSize:  [40, 40],
 });
 
+// Search Bar
+
+function filterUpdate(){  
+	var info=document.getElementById("filter").value;  
+	var filter = "Name=" + "'" + info + "'"
+	points.setParams({CQL_FILTER:filter});
+	points.addTo(map);
+	console.log(info, filter)
+}
+
+var substringMatcher = function(strs) {
+  return function findMatches(q, cb) {
+    var matches, substringRegex;
+
+    // an array that will be populated with substring matches
+    matches = [];
+
+    // regex used to determine if a string contains the substring `q`
+    substrRegex = new RegExp(q, 'i');
+
+    // iterate through the pool of strings and for any string that
+    // contains the substring `q`, add it to the `matches` array
+    $.each(strs, function(i, str) {
+      if (substrRegex.test(str)) {
+        matches.push(str);
+      }
+    });
+
+    cb(matches);
+  };
+};
+
+var places = ['HOD Mechanical/ Avionics Engineering', 'HOD Electrical Engineering', 'Transport Office', 'Vice Chancellor Office', 'HOD Aerospace Engineering 1st Floor', 'HOD Materials Engineering 1st Floor',
+  'Student Affairs 1st Floor', 'IST Library', 'ATM Machine','Astronomy Lab','HOD Space Sciences',
+  'Reproduction Cell','GREL Lab','Dean Office 1st Floor'];
+
+$('#the-basics .typeahead').typeahead({
+  hint: true,
+  highlight: true,
+  minLength: 1
+},
+{
+  name: 'places',
+  source: substringMatcher(places)
+});
+
+//---ROUTING FUNCTIONALITY---//
 var eicon =  L.icon({
     iconUrl: 'end.png',
     shadowUrl: null,
@@ -105,35 +130,65 @@ var eicon =  L.icon({
 });
 
 var selectedPoint = null;
+/*
+map.locate({setView: false, maxZoom: 16});
+
+function onLocationFound(e) {
+    var radius = e.accuracy;
+    var sourceMarker = L.marker(e.latlng, {
+    	icon: sicon,
+    	draggable: true
+    })
+    .on("dragend", function(e) {
+    	selectedPoint = e.target.getLatLng(); 
+    	getRoute(); console.log(sourceMarker.getLatLng())
+	}).addTo(map)
+
+}
+
+map.on('locationfound', onLocationFound);*/
 
 var sourceMarker = L.marker([33.5183, 73.1789], {
 	icon: sicon,
     draggable: true
 })
 .on("dragend", function(e) {
-    selectedPoint = e.target.getLatLng(); //console.log(selectedPoint)
+    selectedPoint = e.target.getLatLng(); 
     getRoute(); 
 })
 .addTo(map); 
+/*
+function onMapClick(e) {
+	var targetMarker = L.marker(e.latlng, {
+		icon: eicon,
+    	draggable: true
+	})
+	.on("dragend", function(e) {
+   		selectedPoint = e.target.getLatLng(); 
+    	getRoute(); 
+	}).addTo(map)
+}
 
+map.on('click', onMapClick);
+*/
 var targetMarker = L.marker([33.5191, 73.1768], {
 	icon: eicon,
     draggable: true
 })
 .on("dragend", function(e) {
-    selectedPoint = e.target.getLatLng(); //console.log(selectedPoint)
+    selectedPoint = e.target.getLatLng(); 
     getRoute(); 
 })
 .addTo(map); 
 var routing = null;
 function getRoute(){
-    var start = sourceMarker.getLatLng(); // console.log(start.lng)
+    var start = sourceMarker.getLatLng(); 
     var end = targetMarker.getLatLng();   
 	var viewparams = 'y1:' + start.lat + ';' + 'x1:' + start.lng + ';' + 'y2:' + end.lat + ';' + 'x2:' + end.lng
 	console.log(routing)
 	if (routing == null){
-			routing = L.tileLayer.wms('http://localhost:8010/geoserver/pgRouting/wms' , {
-		        layers: 'pgRouting:new_pgRouting',
+			routing = L.tileLayer.wms('http://localhost:8010/geoserver/IST_Mosaic/wms' , {
+		        layers: 'IST_Mosaic:Final_Route',
 		        format: 'image/png',
 			//	styles: 'simple_roads',
 		        transparent: true
@@ -142,8 +197,8 @@ function getRoute(){
 	}
 	else {
 			map.removeLayer(routing)
-			routing = L.tileLayer.wms('http://localhost:8010/geoserver/pgRouting/wms' , {
-		        layers: 'pgRouting:new_pgRouting',
+			routing = L.tileLayer.wms('http://localhost:8010/geoserver/IST_Mosaic/wms' , {
+		        layers: 'IST_Mosaic:Final_Route',
 		        format: 'image/png',
 			//	styles: 'simple_roads',
 		        transparent: true
@@ -152,27 +207,7 @@ function getRoute(){
 	}
 		
 }
-/*sourceMarker.on('dragend', function (e) {
-  document.getElementById('start').value = sourceMarker.getLatLng().lat;
-  document.getElementById('start').value = sourceMarker.getLatLng().lng;
-});
 
-targetMarker.on('dragend', function (e) {
-  document.getElementById('end').value = targetMarker.getLatLng().lat;
-  document.getElementById('end').value = targetMarker.getLatLng().lng;
-});
-    
-	//--Adding Layers to the map collectively as one variable--//
-//var layer_Poly = L.layerGroup([Buildings,Grounds,Lawns]).addTo(map);
-//var layer_Line = L.layerGroup([Line]).addTo(map);
-//var layer_route = L.layerGroup([routing]).addTo(map);
-	//var layer_traffic = L.layerGroup([googleTraffic]);
-/*var overlays = {
-	"Buildings":layer_Poly,
-	"Roads":layer_Line,
-	//"Route":layer_route,
-};*/
-//layer_control = L.control.layers(baseMaps, null, {position:'topleft'}).addTo(map);
 
 //--Adding ICONS to the map to highlight some important locations--//
 
@@ -262,18 +297,9 @@ var exit = L.icon({
     shadowUrl: null,
     iconSize: [30, 30]
 });
-var pulsingIcon = L.icon.pulse({iconSize:[10,10],color:'red'});
-var search = L.marker([33.521500, 73.176870],{icon: pulsingIcon}); //mech hod
-var search1 = L.marker([33.521500, 73.176870],{icon: pulsingIcon}); //mat hod
-var search2 = L.marker([33.521518, 73.176516],{icon: pulsingIcon}); //elec hod
-var search3 = L.marker([33.519560, 73.176355],{icon: pulsingIcon}); //transport office
-var search4 = L.marker([33.519719, 73.175992],{icon: pulsingIcon}); //dean office 1st floor
-var search5 = L.marker([33.519641, 73.175724],{icon: pulsingIcon}); //vc office 
-var search6 = L.marker([33.519967, 73.175748],{icon: pulsingIcon}); //department of aero 1st floor
-var search7 = L.marker([33.519683, 73.176291],{icon: pulsingIcon}); //department of avionics 1st floor
-var search8 = L.marker([33.519792, 73.175625],{icon: pulsingIcon}); //student affairs 1st floor
+
 	//The markers act as the icons once they have been styled appropriately
-var libr = L.marker([33.520001, 73.175823],{icon:library}).bindPopup("<b>IST Library</b>");
+//var libr = L.marker([33.520001, 73.175823],{icon:library}).bindPopup("<b>IST Library</b>");
 var dine = L.marker([33.520932, 73.174288],{icon:dining}).bindPopup("<b>IST New Mess</b>");
 var dine2 = L.marker([33.519897, 73.174769],{icon:dining}).bindPopup("<b>IST Old Mess</b>");
 var tuc = L.marker([33.520413, 73.175694],{icon:tucshop}).bindPopup("<b>IST Tuc Shop</b>");
@@ -281,12 +307,12 @@ var park = L.marker([33.519383, 73.177498],{icon:parking}).bindPopup("<b>Parking
 var host = L.marker([33.522167, 73.173225],{icon:hostel}).bindPopup("<b>Boys Hostel</b>");
 var host1 = L.marker([33.519584, 73.173383],{icon:hostel}).bindPopup("<b>Girls Hostel</b>");
 var host2 = L.marker([33.520262, 73.174246],{icon:hostel1}).bindPopup("<b>Faculty Hostel</b>");
-var atm = L.marker([33.519031, 73.177027],{icon:atmico}).bindPopup("<b>ATM Machine</b>");
-var rep = L.marker([33.520824, 73.175959],{icon:repico}).bindPopup("<b>Stationary and Printing</b>");
+//var atm = L.marker([33.519031, 73.177027],{icon:atmico}).bindPopup("<b>ATM Machine</b>");
+//var rep = L.marker([33.520824, 73.175959],{icon:repico}).bindPopup("<b>Stationary and Printing</b>");
 var toil = L.marker([33.519708, 73.176003],{icon:toilico}).bindPopup("<b>Male and Female Restrooms</b>");
 var toil1 = L.marker([33.521030, 73.176506],{icon:toilico}).bindPopup("<b>Male and Female Restrooms</b>");
-var labr = L.marker([33.519954, 73.175729],{icon:lab}).bindPopup("<b>GREL Lab</b>");
-var labr1 = L.marker([33.519631, 73.175657],{icon:lab1}).bindPopup("<b>Astronomy Lab</b>");
+//var labr = L.marker([33.519954, 73.175729],{icon:lab}).bindPopup("<b>GREL Lab</b>");
+//var labr1 = L.marker([33.519631, 73.175657],{icon:lab1}).bindPopup("<b>Astronomy Lab</b>");
 var labr2 = L.marker([33.522753, 73.176601],{icon:lab2}).bindPopup("<b>Mechanical Engineering Labs</b>");
 var labr3 = L.marker([33.520121, 73.176081],{icon:lab3}).bindPopup("<b>Materials Engineering Labs</b>");
 var entry = L.marker([33.519834, 73.176474],{icon:entrance}).bindPopup("<b>Raza Block Entrance</b>");
@@ -303,15 +329,15 @@ var univ3 = L.marker([33.520128, 73.176062],{icon:blocks}).bindPopup("<b>Block I
 var univ4 = L.marker([33.520438, 73.175295],{icon:blocks}).bindPopup("<b>Block III</b>");
 var univ5 = L.marker([33.519741, 73.177149],{icon:blocks}).bindPopup("<b>Block V</b>");
 
-//L.control.scale().addTo(map);
+
 
 var Food = L.layerGroup([dine, dine2, tuc]); 
 var host = L.layerGroup([host, host1, host2]);
-var atmac = L.layerGroup([atm]);
-var repac = L.layerGroup([rep]);
+//var atmac = L.layerGroup([atm]);
+//var repac = L.layerGroup([rep]);
 var toil = L.layerGroup([toil, toil1]);
-var lib = L.layerGroup([libr]);
-var lab = L.layerGroup([labr, labr1, labr2, labr3]);
+//var lib = L.layerGroup([libr]);
+//var lab = L.layerGroup([labr, labr1, labr2, labr3]);
 var enter = L.layerGroup([entry, entry1, exiter, exiter1, exiter2]);
 var park = L.layerGroup([parky, parky1]);
 var uni = L.layerGroup([univ]);
@@ -320,15 +346,6 @@ var uni2 = L.layerGroup([univ4]);
 var uni3 = L.layerGroup([univ3]);
 var uni4 = L.layerGroup([univ5]);
 var uni5 = L.layerGroup([univ2]);
-/*var pulsar = L.layerGroup([search]);
-var pulsar1 = L.layerGroup([search1]);
-var pulsar2 = L.layerGroup([search2]);
-var pulsar3 = L.layerGroup([search3]);
-var pulsar4 = L.layerGroup([search4]);
-var pulsar5 = L.layerGroup([search5]);
-var pulsar6 = L.layerGroup([search6]);
-var pulsar7 = L.layerGroup([search7]);
-var pulsar8 = L.layerGroup([search8]);*/
 
 $("#Food").click(function(event) {
     event.preventDefault();
@@ -429,7 +446,7 @@ $("#enter").click(function(event) {
    }
 });
 
-$("#lib").click(function(event) {
+/*$("#lib").click(function(event) {
     event.preventDefault();
     if(map.hasLayer(lib)) {
         $(this).removeClass('selected');
@@ -438,9 +455,9 @@ $("#lib").click(function(event) {
         map.addLayer(lib);        
         $(this).addClass('selected');
    }
-});
+});*/
 
-$("#lab").click(function(event) {
+/*$("#lab").click(function(event) {
     event.preventDefault();
     if(map.hasLayer(lab)) {
         $(this).removeClass('selected');
@@ -449,7 +466,7 @@ $("#lab").click(function(event) {
         map.addLayer(lab);        
         $(this).addClass('selected');
    }
-});
+});*/
 
 $("#host").click(function(event) {
     event.preventDefault();
@@ -462,7 +479,7 @@ $("#host").click(function(event) {
    }
 });
 
-$("#atm").click(function(event) {
+/*$("#atm").click(function(event) {
     event.preventDefault();
     if(map.hasLayer(atm)) {
         $(this).removeClass('selected');
@@ -471,9 +488,9 @@ $("#atm").click(function(event) {
         map.addLayer(atm);        
         $(this).addClass('selected');
    }
-});
+});*/
 
-$("#rep").click(function(event) {
+/*$("#rep").click(function(event) {
     event.preventDefault();
     if(map.hasLayer(rep)) {
         $(this).removeClass('selected');
@@ -482,7 +499,7 @@ $("#rep").click(function(event) {
         map.addLayer(rep);        
         $(this).addClass('selected');
    }
-});
+});*/
 
 $("#toil").click(function(event) {
     event.preventDefault();
@@ -494,40 +511,6 @@ $("#toil").click(function(event) {
         $(this).addClass('selected');
    }
 });
-
-// Seacrh Bar
-
-var data = [
-{"loc":[33.521500, 73.176870], "title":"HOD Mechanical Engineering/ HOD Materials Engineering"},
-{"loc":[33.521518, 73.176516], "title":"HOD Electrical Engineering"},
-{"loc":[33.519560, 73.176355], "title":"Transport Office"},
-{"loc":[33.519719, 73.175992], "title":"Dean Office (1st Floor)"},
-{"loc":[33.519641, 73.175724], "title":"Vice Chancellor Office"},
-{"loc":[33.519967, 73.175748], "title":"HOD Aerospace Engineering"},	
-{"loc":[33.519683, 73.176291], "title":"Department of Avionics and Aerospace"},
-{"loc":[33.519792, 73.175625], "title":"Student Affairs (1st Floor)"}
-];
-
-var markersLayer = new L.LayerGroup();
-map.addLayer(markersLayer);
-
-var controlSearch = new L.Control.Search({
-	position:'topright',		
-	layer: markersLayer,
-	initial: false,
-	zoom: 18,
-	marker: false
-});
-map.addControl( controlSearch );
-
-for(i in data) {
-var title = data[i].title,	//value searched
-loc = data[i].loc,		//position found
-marker = new L.Marker(new L.latLng(loc), {title: title} );// property searched
-marker.bindPopup(title );
-markersLayer.addLayer(marker);
-}
-
 
 	//---------LEGEND--------//
 var legend = L.control({ position: "bottomright" });
@@ -547,10 +530,10 @@ legend.onAdd = function(map) {
 legend.addTo(map);
 
 
-//L.Routing.control({
-  //waypoints: [
-    //L.latLng(33.5173, 73.1779),
-    //L.latLng(33.5175, 73.1780)
-  //]
-//}).addTo(map);
-//getRoute();*/
+/*L.Routing.control({
+  waypoints: [
+    L.latLng(33.5173, 73.1779),
+    L.latLng(33.5175, 73.1780)
+  ]
+}).addTo(map);
+getRoute();*/

@@ -177,3 +177,16 @@
   cursor: pointer;
 }
 
+.btn-primary{
+  margin-right: 10px;
+  margin-top: 5px;
+}
+.btn-primary:hover{
+  background-color:navy;
+}
+.typeahead{
+  padding: 8px;
+  font-family: Verdana;
+  border: 3px solid pink;
+  border-radius: 10px;
+}

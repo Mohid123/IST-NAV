@@ -59,6 +59,9 @@
     <script src="L.sun.js"></script>
     <script src="L.Icon.Pulse.js"></script>
     <script src="leaflet-search.js"></script>
+
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 
@@ -78,23 +81,11 @@
 
 	<nav class="navbar navbar-dark bg-dark"> <!--specifying the text color for the navbar as well as background color-->
        <!--span class="navbar-text mr-5">IST NAV</span-->
-
-        <!--Search Box-->
-
-        <!--form class="form"> <form class used to create a search box for the routing queries>
-        <div id="the-basics" class="form-group"> <form group ensures proper margins for the box>
-			<input class="typeahead form-control" type="search" placeholder="Where To?" aria-label="Search"> <Specify what appears inside the box> 
+       <div id="the-basics">
+        	<input class="typeahead" id = "filter" type="text" placeholder="Where To?" name="search">
+			<button class="btn btn-primary" type="submit" onclick = "filterUpdate()">Start Search</button> 
 		</div>
-		<div class="form-group">
-			<button id="pulse" style="color:#006400; font-family: Snell Roundhand, cursive; font-size: 16px;" class="btn btn-light my-sm-0" type="submit">Start Search</button> <create a button for the search box using form group again>
-		</div>
-		</form-->
-		<div class="fa-2x">
-			<h6 style="font-family:Snell Roundhand, cursive; color:white; font-size: 18px; opacity: 0.6; margin-left: 16px;">Application Running</h6><i class="fas fa-cog fa-spin" style="color: white;"></i><i class="fas fa-cog fa-spin" style="color: white;"></i><i class="fas fa-cog fa-spin" style="color: white;"></i><i class="fas fa-cog fa-spin" style="color: white;"></i><i class="fas fa-cog fa-spin" style="color: white;"></i><i class="fas fa-cog fa-spin" style="color: white;"></i>
-		</div>
-
-	           
-		<!--adding menu inside the navbar-->
+		
 
 		<ul class="navbar-nav mx-auto" style="margin-top: 10%; width:100%;"> <!--automatically adjust size of text/buttons etc. inside the navbar-->
 			<li class="nav-item dropdown"> 
@@ -122,32 +113,13 @@
 					<span class="caret"></span>
 				</button>
 				<div class="dropdown-menu" aria-labelledby="dropdown_target">
-					<button class="accordion" title="Click for more options"><i style="padding-right:10%"; class="fas fa-hands fa-lg"></i>Access</button>
-                    <div class="panel">
-                    <ul>
-                    	<button id="park" class="btn-block" title="Good Luck finding a spot"><i style="padding-right:10%; color:#F4A460;" class="fas fa-parking"></i>Parking</button>
-                    	<button id="enter" class="btn-block" title="What! No Reception Commitee"><i style="padding-right:10%; color:#DDA0DD;" class="fas fa-door-open"></i>Entrance</button>
-                    	<button id="host" class="btn-block" title="Restful Accommodations"><i style="padding-right:10%; color:#F4A460;" class="fas fa-bed"></i>Hostels</button>
-                    </ul>
-                    </div>
-
-                    <button class="accordion" title="Click for more options"><i style="padding-right:10%;" class="fas fa-graduation-cap fa-lg"></i>Education</button>
-                    <div class="panel">
-                    	<ul>
-                    		<button id="lib" class="btn-block" title="Keep Quiet and Get Yourself a Book to Read"><i style="padding-right:10%; color:#BDB76B;" class="fas fa-book"></i>Library</button>
-                    		<button id="lab" class="btn-block" title="Instruments, but not the musical ones"><i style="padding-right:10%; color:#008080;" class="fas fa-desktop"></i>Labs</button>
-                    	</ul>
-                    </div>
-
-                    <button class="accordion" title="Click for more options"><i style="padding-right:10%;" class="fas fa-user-cog fa-lg"></i>Facilities</button>
-                    <div class="panel">
-                    	<ul>
-                    		<button id="Food" class="btn-block" title="Hunger Solutions"><i style="padding-right:10%; color:gold;" class="fas fa-utensils"></i>Food</button>
-                    		<button id="toil" class="btn-block" title="When You Gotta Go, You Gotta Go!"><i style="padding-right:10%; color:skyblue;" class="fas fa-toilet"></i>Toilet</button>
-                    		<button id="rep" class="btn-block" title="It actually means a photocopier. What did you think it meant?"><i style="padding-right:10%; color:brown;" class="fas fa-fax"></i>Reproduction Cell</button>
-                    		<button id="atm" class="btn-block" title="Here Comes the Money!"><i style="padding-right:10%; color:green;" class="fas fa-money-bill-wave"></i>ATM machine</button>
-                    	</ul>
-                    </div>
+					<button id="park" class="btn-block btn-lg" title="Good Luck finding a spot"><i style="padding-right:10%; color:#F4A460;" class="fas fa-parking"></i>Parking</button>
+                    <button id="enter" class="btn-block btn-lg" title="What! No Reception Commitee"><i style="padding-right:10%; color:#DDA0DD;" class="fas fa-door-open"></i>Entrance</button>
+                    <button id="host" class="btn-block btn-lg" title="Restful Accommodations"><i style="padding-right:10%; color:#F4A460;" class="fas fa-bed"></i>Hostels</button>
+                    <button id="Food" class="btn-block btn-lg" title="Hunger Solutions"><i style="padding-right:10%; color:gold;" class="fas fa-utensils"></i>Food</button>
+                    <button id="toil" class="btn-block btn-lg" title="When You Gotta Go, You Gotta Go!"><i style="padding-right:10%; color:skyblue;" class="fas fa-toilet"></i>Toilet</button>
+                </div>
+       
 				</div>
 			</li>
 
@@ -177,6 +149,8 @@
 		</ul>
 	</div>
 	<a href="https://github.com/Mohid123/IST-NAV"><i class="fab fa-github fa-2x" style="color: white;"></i></a>
+
+
 	<a href="https://twitter.com/Sports_n_Anime"><i class="fab fa-twitter fa-2x" style="color: white;"></i></a>
     </nav>
     <div id="mapid"></div>
@@ -199,8 +173,6 @@ for (i = 0; i < acc.length; i++) {
       panel.style.display = "none";
     } else {
       panel.style.display = "block";
-     // if ( $(this).find('.panel-content').css('display') == 'none' ) {...}
-      //	if ( $(this).hasClass('active') ) {...}
     }
   });
 }
@@ -215,7 +187,7 @@ $(window).on("load",function(){
 
 <footer class="site-footer">
 	<div class="container">
-		<p style="text-align: center;">&copy; Mohid and Hamza WebPage | ISTNAV.com</p>
+		<p style="text-align: center;">&copy; M&H Developers | ISTNAV.com</p>
 	</div>
 </footer>
 </body>
