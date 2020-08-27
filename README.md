@@ -17,6 +17,6 @@ This is the main styles file for IST-NAV
 ![Image]:(Capture.png)
 ```
 
-For more details just send us a tweet [@Sports_n_Anime]:(https://twitter.com/Sports_n_Anime).
+For more details just send us a tweet [@Sports_n_Anime]:https://twitter.com/Sports_n_Anime
 
 
