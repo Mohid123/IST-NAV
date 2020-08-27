@@ -11,12 +11,12 @@ This is the JS file for all routing functionalities,  buttons, navbar and wms la
 ## Newy.css
 This is the main styles file for IST-NAV
 ## Tools used apart from HTML/CSS and JS:
-- Geoserver to publish host and publish layers
+- Geoserver to publish and host layers
 - POSTGIS and pgRouting to run and test the routing algorithm
 
 ![Image](Capture.png)
 ```
 
-For more details just send us a tweet at [GitHub Flavored Markdown](https://twitter.com/Sports_n_Anime).
+For more details just send us a tweet @sports_n_Anime(https://twitter.com/Sports_n_Anime).
 
 
