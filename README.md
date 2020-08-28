@@ -16,6 +16,6 @@ This is the main styles file for IST-NAV
 
 For more details just send us a tweet :https://twitter.com/Sports_n_Anime or if you prefer the old fashioned style email contact us at muhammadmohid141@gmail.com
 
-![Application Interface]("Capture.PNG")
+![Application Interface](https://github.com/Mohid123/IST-NAV/blob/master/Capture.PNG)
 
 
