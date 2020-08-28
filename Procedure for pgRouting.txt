@@ -3,9 +3,9 @@ CREATE EXTENSION POSTGIS and CREATE EXTENSION pgRouting;
 
 -----First we set our SRID to 4326 and set geometry and add columns:
 
-SELECT Find_SRID('public', 'my_table', 'geom');
---SELECT UpdateGeometrySRID('my_table','geom',4326);
---ALTER TABLE public.my_table 
+SELECT Find_SRID('public', 'roads_table', 'geom');
+--SELECT UpdateGeometrySRID('roads_table','geom',4326);
+--ALTER TABLE public.roads_table 
 --ALTER COLUMN geom TYPE geometry(MultiLineString,4326)
 --USING ST_Force2D(geom);
 
