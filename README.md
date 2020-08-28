@@ -14,7 +14,7 @@ This is the main styles file for IST-NAV
 - Geoserver to publish and host layers
 - POSTGIS and pgRouting to run and test the routing algorithm
 
-For more details just send us a tweet :https://twitter.com/Sports_n_Anime or if you prefer the old fashioned style email contact us at muhammadmohid141@gmail.com
+For more details just contact us via tweet or email 
 
 ![Application Interface](https://github.com/Mohid123/IST-NAV/blob/master/Capture.PNG)
 
