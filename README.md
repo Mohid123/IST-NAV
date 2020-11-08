@@ -1,4 +1,4 @@
-## Welcome to Mohid and Hamza's Github Page
+## Welcome to Mohid's Github Page
 
 This page serves as a gateway to the routing project IST-NAV. IST-NAV is basically a web based routing application for the Institute of Space Technology developed by students (Mohid and Hamza) from the Department of Space Sciences (Remote Sensing and GIS branch)
 
