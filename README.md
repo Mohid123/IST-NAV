@@ -1,6 +1,6 @@
 ## Welcome to Mohid's Github Page
 
-This page serves as a gateway to the routing project IST-NAV. IST-NAV is basically a web and mobile based routing application for the Institute of Space Technology developed as a Final Year Project by Muhammad Mohid from the Department of Space Sciences (Remote Sensing and GIS branch). The project won the Gold Medal for Best Student Project for the Department.
+This page serves as a gateway to the routing project IST-NAV. IST-NAV is basically a web and mobile based routing application for the Institute of Space Technology developed as a Final Year Project by Muhammad Mohid from the Department of Space Sciences (Remote Sensing and GIS branch). 
 
 ## IST-NAV: A Web/Mobile Based Routing Application for IST.
 
