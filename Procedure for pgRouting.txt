@@ -96,7 +96,7 @@ After this query runs successfully check to make sure using the following query 
 
 SELECT ST_MakeLine(route.geom)  as test
 FROM (SELECT *
-      FROM pgr_fromAtoB('mytable_noded',your_lat_start,your_lat_end,your_lon_start,your_lon_end)
+      FROM pgr_fromAtoB('mytable_noded',your_lon_start,your_lat_start,your_lon_end,your_lat_end)
       ORDER BY seq
      ) As route
 
